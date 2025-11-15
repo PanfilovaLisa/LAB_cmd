@@ -1,20 +1,67 @@
-from src.power import power_function
-from src.constants import SAMPLE_CONSTANT
+import sys 
+import re
+import os
+from src.commands import pathes, ls, cd, cat, rm, history, log, mv, cp
+import colorama
 
 
-def main() -> None:
-    """
-    Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-    :return: Данная функция ничего не возвращает
-    """
+def main():
+    
+    print(colorama.Fore.BLUE + os.getcwd()+'>' + colorama.Style.RESET_ALL)
+    for line in sys.stdin:
+        line=line.rstrip()
 
-    target, degree = map(int, input("Введите два числа разделенные пробелом: ").split(" "))
+        log.make_log()
+        history.MakeRecord(line)
 
-    result = power_function(target=target, power=degree)
+        log.log_in(line)
+        RESULT_LOG=False
+        handle = pathes.getPath(line)
 
-    print(result)
+        if handle:
+            command, path, option = handle 
+        else:
+            continue
 
-    print(SAMPLE_CONSTANT)
+        if command=='ls':
+            if result:=ls.ls(path, option):
+                print(result)
+                RESULT_LOG=True
 
-if __name__ == "__main__":
+        elif command=='cd':
+            RESULT_LOG=cd.cd(path)
+
+        elif command=='cat':
+            if (cat.cat(path)):
+                RESULT_LOG=True            
+
+        if command=='cp':
+            if cp.cp(path, option):
+                RESULT_LOG=True
+
+        elif re.search(r'^mv\b', line):
+            mv.mv(path)
+
+        elif command=='rm':
+            if rm.rm(path, option):
+                RESULT_LOG=True
+
+        elif command=='history':
+            if history.printHistory(option):
+                RESULT_LOG = True
+
+        elif command=='undo':
+            if history.undo():
+                RESULT_LOG==True
+
+        elif command=='exit':
+            break
+
+        print(colorama.Fore.BLUE + os.getcwd()+'>' + colorama.Style.RESET_ALL)
+        if RESULT_LOG:
+            log.log_in('SUCCESS')
+    
+
+
+if __name__ == '__main__':
     main()

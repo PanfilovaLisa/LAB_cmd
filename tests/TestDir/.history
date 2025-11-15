@@ -1,0 +1,4 @@
+cat 'file with space.txt' file3.txt file_for_cat.txt
+cat 'file with space.txt' file3.txt file_for_cat.txt
+cat 'file with space.txt' file3.txt file_for_cat.txt
+ls tests/TesDir
