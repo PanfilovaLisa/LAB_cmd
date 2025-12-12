@@ -5,11 +5,26 @@ def make_log():
     return
 
 def log_in(line):
+    """
+    Делает запись в файле shell.log
+
+    Аргументы:
+        line - текст для записи
+    """
     logging.info(line)
     return
 
 
 def get_mistake(func):
+    """
+    Декоратор для функций.
+
+    Аргументы:
+        func - декорируемая функция
+
+    Декоратор принимает сообщение об ошибке во время исполнения - RESULT. Выводит сообщение в терминал и делает
+    соответствующую запись в shell.log. Возвращает False для завершения декорируемой функции.
+    """
     def wrapper(*args):
         RESULT = func(*args)
         if RESULT!=True:

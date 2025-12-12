@@ -36,12 +36,13 @@ def main():
             if (cat.cat(PathList, OptionList)):
                 RESULT_LOG=True            
 
-        if command=='cp':
+        elif command=='cp':
             if cp.cp(PathList, OptionList):
                 RESULT_LOG=True
 
-        elif re.search(r'^mv\b', line):
-            mv.mv(PathList)
+        elif command=='mv':
+            if mv.mv(PathList, OptionList):
+                RESULT_LOG=True
 
         elif command=='rm':
             if rm.rm(PathList, OptionList):

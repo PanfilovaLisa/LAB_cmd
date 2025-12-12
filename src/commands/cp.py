@@ -37,6 +37,9 @@ def cp(PathList, OptionList):
     
     # Поочерёдное копирование в назначения
     for destination in PathList:
+        if destination==source: return f"cp: {source} and {destination} are the same file"
+        if source in destination: return f"cp: cannot copy a directory, {source}, into itself, {os.path.join(destination, os.path.basename(source))}"
+        
         match pathes.FileOrDir(source):
             # Обычно копирование, если источник является файлом
             case 'file':
