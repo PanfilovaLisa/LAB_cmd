@@ -1,67 +1,58 @@
 import os
-from src.commands import pathes, log
-import sys 
-import colorama
-
-def getPermission():
-    ...
-
-def clearTrash():
-    ...
-
-def savePath(ctlg, file):
-    with open('.undo', 'w') as save:
-        save.write('rm' + file + ' ' + ctlg + '\n')
+from src.commands import log
+import shutil
 
 
-    # Функция очистки корзины рекурсивно проходится по файлам и каталогам и удаляет.
-    # Функция удаления каталога
-    # Обычное удаление переносит в папку корзины
+@log.get_mistake
+def rm(PathList, OptionList):
+    """
+    Удаление указанного файла или директории.
 
+    Аргументы:
+        PathList - список адресов. Первый адрес - адрес источника (source)
+        OptionList - список опций. В работе используется только опция '-r'.
+    
+    Удаление файлов/каталогов происходит через их перемещение в директорию .trash/. Для удаления каталога требуется письменное подтверждение пользователя. 
+    Удаление родительского и корневого каталогов не допускается.
+    """
+    # Определение наличия опции
+    option=False
+    for opt in OptionList:
+        # Опция найдена
+        if opt=='-r':
+            option=True
+        else:
+            return f'ls: invalid option -- "{option[1:]}"'
+    
+    # Не был указан путь
+    if PathList==[]:
+        return "rm: missing operand"
+    
+    # Поочерёдная обработка путей
+    for path in PathList:
+        # Не допускается к удалению
+        if path=='..': return "rm: refusing to remove '.' or '..' directory: skipping '..'"
+        if path[0]=='/': return "rm: it is dangerous to operate recursively on '/'"
+        # Удаление файла
+        if os.path.isfile(path):
+            shutil.move(path, os.path.join('.trash', os.path.basename(path)))
+        # Удаление директории
+        else:
+            # Для удаления директории необходимо наличие опции '-r'
+            if option==False: 
+                return f"rm: cannot remove {path}: Is a directory"
+            # Не допускается удаление родительского каталога
+            if path in os.getcwd(): return f"rm: cannot remove {path}: Родительский каталог"
 
-    # Что если ответ - нет
-    # Удаление родительских каталогов - CRITICAL в логе
+            # Запрос на подтверждение удаления
+            print(f"You want to delete direstory {path}. Do you want to continue? Y/n")
+            line=input().strip()
+            # Операция  не была одобрена пользователем
+            if line=='n': return "Operation aborted."
+            # Операция одобрена
+            shutil.move(path, os.path.join('.trash', os.path.basename(path)))
+            print('Successfully removed')
 
-def rm(path, option):
-    ctlg, file = os.path.split(path)
-    match pathes.FileOrDir(path):
-        # Определяем, что удалять - файл или каталог
-        case 'file':
-            savePath(ctlg, file)
-            # Удаление файла - перенос в каталог .trash
-            os.rename(path, os.path.join('.trash', file))
-            return True
-        
-        case 'dir':
-            # Удаление каталога требует наличия опции -r
-            if option=='-r':
-                print(f'Это действие приведёт к удалению каталога {path} и содержащихся в нём файлов. Продолжить? y/n')
-                
-                # Подтверждение удаления
-                for line in sys.stdin:
-                    if line.rstrip() == 'y':
-                        savePath(ctlg, file)
-                        # Перенос каталога в .trash
-                        os.rename(path, os.path.join('.trash', file))
-                        return True
-                    else:
-                        print(colorama.Fore.GREEN + 'Отменено.' + colorama.style.RESETALL)
-                        log.log_in('CANCELED')
-                        return False 
-                    
-            # Команда на удаление каталога без опции -r
-            elif option == 'None':
-                RESULT = f'rm: cannot remove "{path}": Is a directory'
-                log.log_in('ERROR: ' + RESULT)
-                return False
-            else:
-                RESULT = f'rm: invalid option -- "{option}"'
-                log.log_in('ERROR: ' + RESULT)
-                return False
+    return True
             
-
-       # for file in os.listdir(path):
-                        #     print(f'{file} ----- ' + colorama.Fore.RED + 'deleted' + colorama.Style.RESET_ALL)
-                        #     os.rename(file, os.path.join('.trash', os.path.split(path)[-1], file))
-                        #     os.remove(os.path.join(path, file))
-                        # os.rmdir(path)            
+    
