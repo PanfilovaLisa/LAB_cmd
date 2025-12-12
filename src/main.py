@@ -19,35 +19,35 @@ def main():
         handle = pathes.getPath(line)
 
         if handle:
-            command, path, option = handle 
+            command, PathList, OptionList = handle.values()
         else:
             continue
 
         if command=='ls':
-            if result:=ls.ls(path, option):
+            if result:=ls.ls(PathList, OptionList):
                 print(result)
                 RESULT_LOG=True
 
         elif command=='cd':
-            RESULT_LOG=cd.cd(path)
+            RESULT_LOG=cd.cd(PathList)
 
         elif command=='cat':
-            if (cat.cat(path)):
+            if (cat.cat(PathList)):
                 RESULT_LOG=True            
 
         if command=='cp':
-            if cp.cp(path, option):
+            if cp.cp(PathList, OptionList):
                 RESULT_LOG=True
 
         elif re.search(r'^mv\b', line):
-            mv.mv(path)
+            mv.mv(PathList)
 
         elif command=='rm':
-            if rm.rm(path, option):
+            if rm.rm(PathList, OptionList):
                 RESULT_LOG=True
 
         elif command=='history':
-            if history.printHistory(option):
+            if history.printHistory(OptionList):
                 RESULT_LOG = True
 
         elif command=='undo':

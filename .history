@@ -117,3 +117,14 @@ ls -l
 ls -l
 cp -r tests/TestDir ..
 cp -r tests/TestDir src
+ls
+history
+ cd tests
+rm tests/TestDir
+ls
+ls -l
+ls tests
+ls
+exit
+ls
+ls
