@@ -1,1 +1,11 @@
 history
+cd tests
+ls -a
+ls -l
+ls tests
+exit
+exit
+cd ..
+cd commands
+ls ~
+exit

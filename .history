@@ -1,175 +1,55 @@
-ls
-cd tests
-history
-cd
-ls
-history
-history 3
-дls
-ls
-ls
-cd src
-history
-cd tests
-cd
-cd
-cd
-cd
-ls
-ls
-ls
-ls
-cd
-cd src
-ls
 ls -l
-history
-history
-history
-history
-ls tr
-ls
-ls -l
-ls
-ls
-ls src/main.py
-ls src/main.py
-ls src/main.py
-ls src/main.py
-ls src/main.py
-ls src/main.py
-ls src/main.py
-ls src/main.py
-ls tests/TestDir
-ls LAB_cmd/tests/TestDir
-ls
-ls
-ls 'file with space.txt'
-ls
-ls 'file with space.txt'
-ls 'file with space.txt'
-ls 'file with space.txt'
-ls 'file with space.txt'
-ls 'file with space.txt'
-ls 'file with space.txt'
-ls 'file with space.txt'
-ls 'file with space.txt'
-ls 'file with space.txt'
-ls tests/TestDir/'file with space.txt'
-ls tests/TestDir/'file with space.txt'
-ls tests/TestDir/'file with space.txt'
-ls tests/TestDir/'file with space.txt'
-ls
-cat src/main.py
-cat src/main.py
-history
-ls
-ls tests/testing
-ls tests
-ls tests\TestDir
-ls tests/TestDir
-ls tests\TestDir
-cd ..
-cd rto
-ls
-cat venv
-cat src/main.py
-cat plov.txt
-ls
-rm tests/TestRM -r
-rm tests/TestRM -r
-rm tests/TestRM -r
-rm tests/TestRM -r
-rm tests/TestRM -r
-ls tests/Test
-rm tests/Test/file3.txt
-rm tests/Test/file3.txt
-ls tests/Test
-ls .trash
-ls
-rm tests/Test -r
-rm tests/Test -r
-rm tests/Test -r
-history 7
-history
-history
-history 7
-history
-history 10
-rm tests/Test -r
-rm tests/Test -r
-ls
-cat src/main.py src/sommands/pathes.py
-cat src/main.py
-cat src/main.py src/sommands/pathes.py
-cat src/main.py src/sommands/pathes.py
-
-cat src/main.py src/sommands/pathes.py
-cat src/main.py src/sommands/pathes.py
-cat src/main.py src/commands/pathes.py
-    cp tests/TestDir/file3.txt tests
-ls tests
-ls tests
-cp tests/TestDir/file3.txt tests
-ls tests
-cp -r tests/TestDir ..
-ls -l
-ls -l
-cp -r tests/TestDir ..
-cp -r tests/TestDir src
-ls
-history
- cd tests
-rm tests/TestDir
-ls
-ls -l
-ls tests
-ls
-exit
-ls
-ls
-ls
-ls -l
-ls
-ls -l
-ls -l
-ls
-ls -l
-ls src
-ls tests
-ls src tests
 ls -a
-ls src tests
-ls src tests -l
-ls
 exit
 ls
-lls
+cd src
+cd tests
+ls
+cd src
 ls
 exit
+cd cd tests
+cd tests
+ls -a
+
+ls -a
 ls
+ls test
+ls -a
+cd src
 ls
-ls src
+cd src
+ls -a
+ls test
+cd src
 exit
-ls
-ls src
+cd src
 exit
-ls src
-ls
-ls src
-exit
-ls src
-exit
-ls src
-ls src
-exit
-ls src
-exit
-ls src
+cd src
 exit
 ls
-ls -l
-ls src
-ls src tests
-ls src tests/TestDir
+cd src
 exit
+cd src
+exit
+cd src
+cd src
+exit
+cd src
+exit
+cd src
+exit
+cd src
+exit
+cd src
+exit
+cd src
+cd src
+cd src
+cd src
+ls src
+cd src/commands
+cd src
+cd ..
+cd tests
+cd src

@@ -2,7 +2,7 @@ import os
 import tabulate
 import datetime
 import colorama
-from src.commands import pathes, log
+from src.commands import log, home
 
 
 def MakeAnswer(path, option: bool):
@@ -48,6 +48,8 @@ def MakeAnswer(path, option: bool):
     result = tabulate.tabulate(data)
     return result
 
+
+@log.get_mistake
 def ls(PathList, OptionList):
     """
     Отображение списка файлов и каталогов в текущем рабочем.
@@ -76,10 +78,7 @@ def ls(PathList, OptionList):
                 option=True 
             # Была передана неизвестная опция
             else:
-                RESULT = f'ls: invalid option -- "{option[1:]}"'
-                print(RESULT)
-                log.log_in('ERROR: ' + RESULT)
-                return False
+                return f'ls: invalid option -- "{option[1:]}"'
             
     # Путь не указан -> отображает список файлов и каталогов в текущем раблочем каталоге (path=None)
     if PathList==[]:
@@ -88,6 +87,8 @@ def ls(PathList, OptionList):
         return True
     
     for path in PathList:
+        if path=='~':
+            path = home.HomeDir
         print(path)
         print(MakeAnswer(path, option))
     

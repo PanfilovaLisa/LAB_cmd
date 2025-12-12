@@ -77,20 +77,20 @@ def getPathWithSpace(line):
             OptionsList = [option for option in CommandsLine if getOption(option)]
     return {'com': command, 'opt': OptionsList, 'path': PathList} if PathList else False
 
-
-def checkRightPath(pathline=None, file=None):
-    if pathline!=None:
-        path=pathline 
-    else:
-        path=file
-    if os.path.exists(path):
-        return pathline if pathline!=None else file
+@log.get_mistake
+def checkRightPath(path):
+    # if pathline!=None:
+    #     path=pathline 
+    # else:
+    #     path=file
+    # if os.path.exists(path):
+    #     return pathline if pathline!=None else file
+    # else:
+    if os.path.exists(path) or path == '~':
+        return True
     else:
         # Не существующий путь
-        RESULT = f"Cannot access '{path}': No such file or directory"
-        print(RESULT)
-        # log.log_in('ERROR: ' + RESULT)
-        return False   
+        return f"Cannot access '{path}': No such file or directory"
 
 
 def getPath(line):        
@@ -108,6 +108,7 @@ def getPath(line):
     # Нахождение путей
     PathList = []
     for string in CommandsLine:
+        
         # Подгон пути под ОС
         path = EditPath(string)
         # Проверка правильный ли путь

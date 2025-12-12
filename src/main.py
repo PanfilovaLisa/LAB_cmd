@@ -1,12 +1,13 @@
 import sys 
 import re
 import os
-from src.commands import pathes, ls, cd, cat, rm, history, log, mv, cp
+from src.commands import pathes, ls, cd, cat, rm, history, log, mv, cp, home
 import colorama
 
 
 def main():
-    
+    # Определение домашней директории
+    home.HomeAddress()
     print(colorama.Fore.BLUE + os.getcwd()+'>' + colorama.Style.RESET_ALL)
     for line in sys.stdin:
         line=line.rstrip()
@@ -22,13 +23,14 @@ def main():
             command, OptionList, PathList = handle.values()
         else:
             continue
-
+        
+        
         if command=='ls':
             if result:=ls.ls(PathList, OptionList):
                 RESULT_LOG=True
 
         elif command=='cd':
-            RESULT_LOG=cd.cd(PathList)
+            RESULT_LOG=cd.cd(PathList, OptionList)
 
         elif command=='cat':
             if (cat.cat(PathList)):

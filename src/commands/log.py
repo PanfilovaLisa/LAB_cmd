@@ -7,3 +7,14 @@ def make_log():
 def log_in(line):
     logging.info(line)
     return
+
+
+def get_mistake(func):
+    def wrapper(*args):
+        RESULT = func(*args)
+        if RESULT!=True:
+            print(RESULT)
+            log_in('ERROR: ' + RESULT)
+            return False 
+        return True
+    return wrapper
