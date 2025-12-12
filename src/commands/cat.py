@@ -1,5 +1,5 @@
 import os
-from src.commands import pathes, log
+from src.commands import log
 
 @log.get_mistake
 def cat(PathList, OptionList):

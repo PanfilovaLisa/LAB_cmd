@@ -62,3 +62,17 @@ src cat src/commands/test.py mv.py
 cat src/commands/test.py mv.py
 exit
 cat test.pdf
+cat src
+cp tests/TestDir src
+cp tests/TestDir src -r
+cp tests/TestDir src -r
+ls src
+cp tests/TestDir src
+cp tests/TestDir src/commands/test.py
+cp tests/TestDir src/commands/test.py -r
+cp tests/TestDir src -r
+cp tests/TestDir src -r
+ls src
+ls src/TestDir
+cp src/commands/test.py tests
+exit

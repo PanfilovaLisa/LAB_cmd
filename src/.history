@@ -1,11 +1,4 @@
-history
-cd tests
-ls -a
-ls -l
-ls tests
-exit
-exit
-cd ..
-cd commands
-ls ~
-exit
+cat 'file with space.txt' file3.txt file_for_cat.txt
+cat 'file with space.txt' file3.txt file_for_cat.txt
+cat 'file with space.txt' file3.txt file_for_cat.txt
+ls tests/TesDir
