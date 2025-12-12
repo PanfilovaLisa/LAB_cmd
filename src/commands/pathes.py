@@ -113,6 +113,8 @@ def getPath(line):
         # Проверка правильный ли путь
         if checkRightPath(path):
             PathList+=[path]
+        else:
+            return False
     return {'com': command, 'opt': OptionsList, 'path': PathList}
 
 

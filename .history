@@ -128,3 +128,48 @@ ls
 exit
 ls
 ls
+ls
+ls -l
+ls
+ls -l
+ls -l
+ls
+ls -l
+ls src
+ls tests
+ls src tests
+ls -a
+ls src tests
+ls src tests -l
+ls
+exit
+ls
+lls
+ls
+exit
+ls
+ls
+ls src
+exit
+ls
+ls src
+exit
+ls src
+ls
+ls src
+exit
+ls src
+exit
+ls src
+ls src
+exit
+ls src
+exit
+ls src
+exit
+ls
+ls -l
+ls src
+ls src tests
+ls src tests/TestDir
+exit

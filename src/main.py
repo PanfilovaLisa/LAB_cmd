@@ -19,13 +19,12 @@ def main():
         handle = pathes.getPath(line)
 
         if handle:
-            command, PathList, OptionList = handle.values()
+            command, OptionList, PathList = handle.values()
         else:
             continue
 
         if command=='ls':
             if result:=ls.ls(PathList, OptionList):
-                print(result)
                 RESULT_LOG=True
 
         elif command=='cd':
