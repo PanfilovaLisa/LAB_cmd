@@ -27,15 +27,3 @@ def cd(PathList, OptionList):
             os.chdir(path)
     
     return True
-
-    # match os.path.isdir:
-    #     case 'file':
-    #         RESULT = f'ERROR: cd: {PathList} : Not a directory'
-    #         print(RESULT)
-    #         return RESULT
-    #     case 'abs':
-    #         os.chdir(os.path.join(*PathList))
-    #     case _:
-    #         os.chdir(PathList)
-    
-    # return 'SUCCESS'

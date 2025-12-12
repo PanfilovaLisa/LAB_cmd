@@ -53,3 +53,12 @@ cd src
 cd ..
 cd tests
 cd src
+ls src/commands
+cat src/commands/test.py
+cat src/commands/test.py
+cat src/commands/test.py
+cat src/commands/test.py src/commands/mv.py
+src cat src/commands/test.py mv.py
+cat src/commands/test.py mv.py
+exit
+cat test.pdf

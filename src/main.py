@@ -33,7 +33,7 @@ def main():
             RESULT_LOG=cd.cd(PathList, OptionList)
 
         elif command=='cat':
-            if (cat.cat(PathList)):
+            if (cat.cat(PathList, OptionList)):
                 RESULT_LOG=True            
 
         if command=='cp':
@@ -56,6 +56,7 @@ def main():
                 RESULT_LOG==True
 
         elif command=='exit':
+            log.log_in('SUCCESS')
             break
 
         print(colorama.Fore.BLUE + os.getcwd()+'>' + colorama.Style.RESET_ALL)
