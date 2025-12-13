@@ -13,7 +13,9 @@ def cd(PathList, OptionList):
     """
     if len(PathList)>1 or len(OptionList)>0:
         return '-bash: cd: too many arguments'
-
+    # Если не был передан путь - переход в "домашний каталог"
+    if PathList == []:
+        os.chdir(home.HomeDir)
     path = PathList[0]
     if os.path.isfile(path):
         return f'-bash: cd: {path}: Not a directory'
