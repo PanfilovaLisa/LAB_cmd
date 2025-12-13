@@ -1,33 +1,15 @@
 import os
 import re
 from src.commands import log
+from typing import Union, Optional
     
-
-def commandHistory(line):
-    commands=line.split()
-
-    option = 0
-    command=commands[0]
-
-    if len(commands)==2:
-        print(commands)
-        try:
-            option=int(commands[-1])
-        except:
-            RESULT = f'history: {option}: numeric argument required'
-            print(RESULT)
-            log.log_in('ERROR: ' + RESULT)
-            return False
-    return (command, None, option)
-
-
-def getOption(line):
+def getOption(line: str) -> Optional[str]:
     if option:= re.findall(r'\-\w\b', line):
         return option
     return None
 
 
-def EditPath(path):
+def EditPath(path: str) -> str:
     slash = ''
     # Если путь в системе Linux
     if ('/' in path):
@@ -43,7 +25,7 @@ def EditPath(path):
     return path
 
 
-def getPathWithSpace(line):
+def getPathWithSpace(line: str) -> Union[dict, False]:
     # Выражение файла, в названии которого есть пробел
     fileWithSpace = r'[\'"]{1}[\w+\s*]*.\w+[\'"]{1}'
     # Составление пути файла, в названии которого есть пробел
@@ -81,14 +63,7 @@ def getPathWithSpace(line):
     return {'com': command, 'opt': OptionsList, 'path': PathList} if PathList else False
 
 @log.get_mistake
-def checkRightPath(path):
-    # if pathline!=None:
-    #     path=pathline 
-    # else:
-    #     path=file
-    # if os.path.exists(path):
-    #     return pathline if pathline!=None else file
-    # else:
+def checkRightPath(path: str) -> Union[True, False]:
     if os.path.exists(path) or path == '~':
         return True
     else:
@@ -96,7 +71,22 @@ def checkRightPath(path):
         return f"Cannot access '{path}': No such file or directory"
 
 
-def getPath(line):        
+def getPath(line: str) -> Union[dict, False]:   
+    """
+    Обработка введённой команды.
+
+    Аргументы:
+        line: str - строка команды
+
+    Вывод:
+        1) Словарь вида:
+            dict = {
+                'com' : <Команда для выполнения: str>,
+                'opt': <Список переданных опций: list>,
+                'path': <Список переданных адресов: list>,
+            };
+        2) False - если был обнаружен несуществующий путь.
+    """     
     # Проверка на наличие файлов с пробелами
     if CommandDict:=getPathWithSpace(line):
         return CommandDict
@@ -104,6 +94,10 @@ def getPath(line):
     CommandsLine=line.split()
     # Определение команды
     command, CommandsLine = CommandsLine[0], CommandsLine[1:]
+
+    # Обнаружение команды history
+    if command == 'history':
+        return {'com': command, 'opt': CommandsLine, 'path': []}
 
     # Определение опций
     OptionsList = [option for option in CommandsLine if getOption(option)]
