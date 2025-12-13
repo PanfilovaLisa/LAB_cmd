@@ -1,14 +1,23 @@
 import unittest
+from unittest.mock import patch
 from src.commands import cat
+import os
 
-class catCommandTestCase(unittest.TestCase):
-    def test_readFile(self):
-        self.assertTrue(cat.cat('tests/TestDir/file_for_cat.txt'))
+class CpCommandTestCase(unittest.TestCase):
 
+    #Была передана опция
+    @patch('builtins.print')
+    @patch('src.commands.cp.log.get_mistake')
+    def test_empty_PathList(self, mock_print, mock_getmistake):
+        PathList=[os.path.join('src', 'main.py')]
+        self.assertFalse(cat.cat(PathList, []))
 
-    def test_readDir(self):
-        self.assertFalse(cat.cat('tests/TestDir'))
+    # Была передана директория
+    @patch('builtins.print')
+    @patch('src.commands.cp.log.get_mistake')
+    def test_single_path(self, mock_print, mock_getmistake):
+        PathList=[os.path.join('src', 'commands')]
+        self.assertFalse(cat.cat(PathList, []))
 
-        
 if __name__ == '__main__':
     unittest.main()

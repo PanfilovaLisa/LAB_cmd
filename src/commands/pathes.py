@@ -65,7 +65,10 @@ def getPathWithSpace(line):
         line = ''.join(line.split(path))
         # Добавляем путь в список путей
         path=''.join(path.split("'"))
-        PathList+=[EditPath(path)]
+        if checkRightPath(path):
+            PathList+=[EditPath(path)]
+        else:
+            return False
 
     # Если в строке были файлы с пробелами
     if PathList:

@@ -14,8 +14,12 @@ def MakeAnswer(path, option: bool):
         option - наличие опции для подробного отображения
 
     Вывод:
-        result - таблица, сформированная с помощью библиотеки tabulate
+        result - таблица, сформированная с помощью библиотеки tabulate. 
+        При передаче файла выведет переданный путь.
     """
+    if os.path.isfile(path):
+        result = colorama.Fore.GREEN + path + colorama.Style.RESET_ALL
+        return result
     # Содержимое текущей директории. type: list
     listdir = os.listdir(path)
     data=[]
@@ -86,6 +90,7 @@ def ls(PathList, OptionList):
         print(MakeAnswer(path, option))
         return True
     
+    # Поочерёдная обработка переданных адресов
     for path in PathList:
         if path=='~':
             path = home.HomeDir
