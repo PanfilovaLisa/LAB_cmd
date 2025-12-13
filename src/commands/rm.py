@@ -1,10 +1,11 @@
 import os
-from src.commands import log
+from src.commands import log, undo
 import shutil
+from typing import Union
 
-
+@undo.add_undo
 @log.get_mistake
-def rm(PathList, OptionList):
+def rm(command: str, PathList: list, OptionList: list) -> Union[True, False]:
     """
     Удаление указанного файла или директории.
 
@@ -28,8 +29,10 @@ def rm(PathList, OptionList):
     if PathList==[]:
         return "rm: missing operand"
     
+    WorkList = PathList.copy()
+
     # Поочерёдная обработка путей
-    for path in PathList:
+    for path in WorkList:
         # Не допускается к удалению
         if path=='..': return "rm: refusing to remove '.' or '..' directory: skipping '..'"
         if path[0]=='/': return "rm: it is dangerous to operate recursively on '/'"

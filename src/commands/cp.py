@@ -1,9 +1,11 @@
 import shutil
 import os
-from src.commands import log, pathes
+from src.commands import log, undo, pathes
+from typing import Union
 
+@undo.add_undo
 @log.get_mistake
-def cp(PathList, OptionList):
+def cp(command: str, PathList: list, OptionList: list) -> Union[True, False]:
     """
     Копирование файла из источника в назначение.
 
@@ -20,10 +22,12 @@ def cp(PathList, OptionList):
     # Ошибка если не было передано ни одного адреса
     if PathList==[]:
         return 'cp: missing file operand'
+    
+    WorkList = PathList.copy()
     # Определение источника копирования
-    source = PathList.pop(0)
+    source = WorkList.pop(0)
     # Ошибка, если был передан только один адрес (источник)
-    if PathList==[]:
+    if WorkList==[]:
         return f"cp: missing destination file operand after {source}"
     
     # Определение опции
@@ -36,7 +40,7 @@ def cp(PathList, OptionList):
             return f"cp: invalid option -- '{opt}'"
     
     # Поочерёдное копирование в назначения
-    for destination in PathList:
+    for destination in WorkList:
         if destination==source: return f"cp: {source} and {destination} are the same file"
         if source in destination: return f"cp: cannot copy a directory, {source}, into itself, {os.path.join(destination, os.path.basename(source))}"
         

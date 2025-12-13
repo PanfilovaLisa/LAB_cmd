@@ -93,7 +93,7 @@ def getPath(line: str) -> Union[dict, False]:
     
     CommandsLine=line.split()
     # Определение команды
-    command, CommandsLine = CommandsLine[0], CommandsLine[1:]
+    command = CommandsLine.pop(0)
 
     # Обнаружение команды history
     if command == 'history':

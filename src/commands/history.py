@@ -2,6 +2,7 @@ import os
 from src.commands import log
 from typing import Union, Optional
 
+
 history_path = os.path.join('.history')
 
 def getHistory() -> list:
@@ -54,12 +55,6 @@ def MakeRecord(line: str):
     """
     Заносит команду в историю
     """
-    with open(history_path, 'a') as his:
+    with open('.history', 'a') as his:
         his.write(line + '\n')
     return
-
-
-def undo():
-    with open('.undo', 'r') as undofile:
-        command=undofile.readline()
-    

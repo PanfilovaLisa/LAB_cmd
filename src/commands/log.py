@@ -27,7 +27,7 @@ def get_mistake(func):
     """
     def wrapper(*args):
         RESULT = func(*args)
-        if RESULT!=True:
+        if type(RESULT) == str:
             print(RESULT)
             log_in('ERROR: ' + RESULT)
             return False 

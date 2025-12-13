@@ -1,9 +1,11 @@
 import os 
 import shutil
-from src.commands import log, pathes
+from src.commands import log, pathes, undo
+from typing import Union
 
+@undo.add_undo
 @log.get_mistake
-def mv(PathList, OptionList):
+def mv(command: str, PathList: list, OptionList: list) -> Union[True, False]:
     """
     Перемещение или переименование файла/каталога.
 
@@ -18,14 +20,15 @@ def mv(PathList, OptionList):
     if PathList==[]:
         return 'mv: missing file operand'
     
+    WorkList = PathList.copy()
     # Определение назначения перемещения
-    destination = PathList.pop()
+    destination = WorkList.pop()
     # Ошибка, если был передан только один адрес (источник)
-    if PathList==[]:
+    if WorkList==[]:
         return f"mv: missing destination file operand after {destination}"
     
     # Если источников несколько назначение должно быть каталогом, а не файлом
-    if len(PathList)>1 and os.path.isfile(destination):
+    if len(WorkList)>1 and os.path.isfile(destination):
         return f"mv: target {destination}: Not a directory"
     
     # Определение опции
@@ -33,7 +36,7 @@ def mv(PathList, OptionList):
         return f"mv: invalid option -- '{OptionList[0]}'"
     
     # Последовательный перебор источников перемещения
-    for source in PathList:
+    for source in WorkList:
         # Если источник и назначение - одно и то же
         if destination==source: return f"mv: {source} and {destination} are the same file"
         # Нельзя перемещать каталог собственный подкаталог

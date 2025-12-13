@@ -1,7 +1,7 @@
 import sys 
 import re
 import os
-from src.commands import pathes, ls, cd, cat, rm, history, log, mv, cp, home
+from src.commands import pathes, ls, cd, cat, rm, history, log, mv, cp, home, undo
 import colorama
 
 
@@ -37,15 +37,15 @@ def main():
                 RESULT_LOG=True            
 
         elif command=='cp':
-            if cp.cp(PathList, OptionList):
+            if cp.cp(command, PathList, OptionList):
                 RESULT_LOG=True
 
         elif command=='mv':
-            if mv.mv(PathList, OptionList):
+            if mv.mv(command, PathList, OptionList):
                 RESULT_LOG=True
 
         elif command=='rm':
-            if rm.rm(PathList, OptionList):
+            if rm.rm(command, PathList, OptionList):
                 RESULT_LOG=True
 
         elif command=='history':
@@ -53,7 +53,7 @@ def main():
                 RESULT_LOG = True
 
         elif command=='undo':
-            if history.undo():
+            if undo.undo():
                 RESULT_LOG==True
 
         elif command=='exit':
